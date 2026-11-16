@@ -1,0 +1,20 @@
+# Render Blueprint — ريلاي Eagle Bet المستقل
+# الاستخدام: Render → New → Blueprint → اختر مستودع eaglebet-relay
+# ملاحظة: RELAY_KEY ليس هنا. Render سيطلبه عند الإنشاء (sync: false).
+services:
+  - type: web
+    name: eaglebet-relay
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: CASHIER_BASE
+        value: https://agents.eaglebet99.com/global/api/
+      - key: RELAY_KEY
+        sync: false
+      - key: NODE_ENV
+        value: production
